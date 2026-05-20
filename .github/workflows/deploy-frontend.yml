@@ -18,9 +18,13 @@ jobs:
           zip -r ../frontend.zip .
           cd ..
 
-      - name: Desplegar en Azure Web App usando Perfil de Publicación
+      - name: Login Oficial en Azure via RBAC Token
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Desplegar en Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'sme-frontend-master'
-          publish-profile: ${{ secrets.AZURE_CREDENTIALS }} # Aquí lee el secreto que acabas de guardar
           package: './frontend.zip'
