@@ -11,9 +11,17 @@
 
     <script>
         document.getElementById('btn').addEventListener('click', async () => {
-            const res = await fetch('/api/GetDatabaseData');
-            const data = await res.json();
-            document.getElementById('resultado').innerText = JSON.stringify(data);
+            // Reemplaza 'sme-api-master-pablo' por el nombre real de tu Function App si cambia
+            const url = 'https://sme-api-master-pablo.azurewebsites.net/api/GetDatabaseData';
+            
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error("Error al consultar la API:", error);
+                document.getElementById('resultado').innerText = "Error al conectar con el backend.";
+            }
         });
     </script>
 </body>
