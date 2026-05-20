@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto Master Serverless</title>
+</head>
+<body>
+    <h1>Panel de Control Serverless</h1>
+    <button id="btn">Consultar Base de Datos</button>
+    <p id="resultado"></p>
+
+    <script>
+        document.getElementById('btn').addEventListener('click', async () => {
+            const res = await fetch('/api/GetDatabaseData');
+            const data = await res.json();
+            document.getElementById('resultado').innerText = JSON.stringify(data);
+        });
+    </script>
+</body>
+</html>
