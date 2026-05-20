@@ -1,0 +1,30 @@
+name: Deploy Frontend to Azure App Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v3
+
+      - name: Comprimir carpeta frontend
+        run: |
+          cd frontend
+          zip -r ../frontend.zip .
+          cd ..
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Desplegar en Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'sme-frontend-master' # El nombre que le pusiste en el paso 2
+          package: './frontend.zip'
