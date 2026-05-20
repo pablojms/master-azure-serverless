@@ -7,8 +7,8 @@ const client = new CosmosClient(endpoint);
 module.exports = async function (context, req) {
     try {
         // Pon aquí el nombre exacto de tu Base de Datos y Contenedor de Cosmos DB
-        const database = client.database("TuBaseDeDatos");
-        const container = database.container("TuContenedor");
+        const database = client.database("SmeMasterDB");
+        const container = database.container("Items");
 
         // Lanzamos una consulta SQL para traer todos los registros
         const { resources: items } = await container.items
