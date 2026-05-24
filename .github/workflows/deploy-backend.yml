@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Código
@@ -15,21 +15,21 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-size: '18.x'
 
-      - name: Instalar Dependencias del Backend
+      - name: Instalar Dependencias de la API
         run: |
           cd api
-          if [ -f package.json ]; then npm install; fi
+          npm install
           cd ..
 
-      - name: Login Oficial en Azure via RBAC Token
+      - name: Login Oficial en Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} # Autenticación nativa por CLI
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Desplegar en Azure Function App (Flex Mode)
-        uses: Azure/functions-action@v1
+      - name: Desplegar subcarpeta API en Azure Functions
+        uses: azure/functions-action@v1
         with:
-          app-name: 'sme-api-master-pablo' # Asegúrate de que este sea el nombre exacto de tu Function App
-          package: './api'
+          app-name: 'sme-api-master-pablo'
+          package: './api'  # <--- CRÍTICO: Esto obliga a subir solo el contenido de la carpeta api
