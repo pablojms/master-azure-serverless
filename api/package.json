@@ -2,9 +2,12 @@
   "name": "sme-backend-api",
   "version": "1.0.0",
   "description": "Backend Serverless de Prueba",
-  "main": "index.js",
+  "main": "GetDatabaseData/index.js",
   "scripts": {
     "start": "func start"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
