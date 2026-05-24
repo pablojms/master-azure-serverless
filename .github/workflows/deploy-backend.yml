@@ -17,7 +17,13 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: Crear Paquete Zip de la API
+      - name: Instalar Dependencias de Producción
+        run: |
+          cd api
+          npm install --production
+          cd ..
+
+      - name: Crear Paquete Zip de la API con Node Modules
         run: |
           cd api
           zip -r ../backend.zip .
@@ -32,4 +38,4 @@ jobs:
         uses: azure/functions-action@v1
         with:
           app-name: 'sme-api-master-pablo'
-          package: './backend.zip'  # <--- Enviamos el zip donde host.json ya está en la raíz
+          package: './backend.zip'
