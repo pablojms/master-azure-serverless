@@ -15,21 +15,15 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v3
         with:
-          node-size: '18.x'
+          node-version: '18.x'
 
-      - name: Instalar Dependencias de la API
-        run: |
-          cd api
-          npm install
-          cd ..
-
-      - name: Login Oficial en Azure
+      - name: Login Oficial en Azure via RBAC Token
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Desplegar subcarpeta API en Azure Functions
+      - name: Desplegar en Azure Functions
         uses: azure/functions-action@v1
         with:
           app-name: 'sme-api-master-pablo'
-          package: './api'  # <--- CRÍTICO: Esto obliga a subir solo el contenido de la carpeta api
+          package: '.'
