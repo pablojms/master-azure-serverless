@@ -1,12 +1,14 @@
 {
   "name": "sme-backend-api",
   "version": "1.0.0",
-  "description": "Backend Serverless de Prueba",
+  "description": "Backend Serverless conectado a Cosmos DB",
   "main": "GetDatabaseData/index.js",
   "scripts": {
     "start": "func start"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@azure/cosmos": "^4.2.0"
+  },
   "engines": {
     "node": ">=18.0.0"
   }
