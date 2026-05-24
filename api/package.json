@@ -1,0 +1,10 @@
+{
+  "name": "sme-backend-api",
+  "version": "1.0.0",
+  "description": "Backend Serverless de Prueba",
+  "main": "index.js",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {}
+}
