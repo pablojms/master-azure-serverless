@@ -7,15 +7,16 @@
 <body>
     <h1>Panel de Control Serverless</h1>
     <button id="btn">Consultar Base de Datos</button>
-    <p id="resultado"></p>
-
-    <script>
+    <pre id="resultado"></pre> <script>
         document.getElementById('btn').addEventListener('click', async () => {
-            // Reemplaza 'sme-api-master-pablo' por el nombre real de tu Function App si cambia
-            const url = 'https://sme-frontend-master-hee9d2h7h3hgdqan.spaincentral-01.azurewebsites.net//api/GetDatabaseData';
+            // Pega aquí la URL completa que obtienes de "Get Function URL" en Azure
+            const url = 'TU_URL_DE_AZURE_FUNCTIONS_AQUÍ';
             
             try {
                 const res = await fetch(url);
+                if (!res.ok) {
+                    throw new Error(`Error en el servidor: ${res.status}`);
+                }
                 const data = await res.json();
                 document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);
             } catch (error) {
